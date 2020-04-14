@@ -3,4 +3,4 @@
 .vs/
 obj/
 bin/
-Weathery\src\Weathery.ServerSide\Weathery.API\appsettings.json
+src/Weathery.ServerSide/Weathery.API/appsettings.json
