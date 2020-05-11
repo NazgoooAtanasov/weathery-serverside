@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Weathery.Data\Weathery.Data.csproj" />
+    <ProjectReference Include="..\Weathery.Utilities\Weathery.Utilities.csproj" />
+    <ProjectReference Include="..\Weathery.ViewModels\Weathery.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,10 +1,19 @@
 ﻿namespace Weathery.API
 {
+    using System.Text;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
+    using Microsoft.IdentityModel.Tokens;
+    using Weathery.API.Utilities;
+    using Weathery.Services.HashService;
+    using Weathery.Services.TokenService;
+    using Weathery.Services.UserServices;
+    using Weathery.Utilities.AuthenticationUtilities;
 
     /// <summary>Defines the startup class for the application.</summary>
     public class Startup
@@ -25,7 +34,43 @@
         /// <param name="services">
         /// A collection of all services needed.
         /// </param>
-        public void ConfigureServices(IServiceCollection services) => services.AddControllers();
+        public void ConfigureServices(IServiceCollection services)
+        {
+            var appSettingsSection = this.configuration.GetSection(nameof(AuthenticationSettings));
+            services.Configure<AuthenticationSettings>(appSettingsSection);
+
+            // configure jwt authentication
+            var appSettings = appSettingsSection.Get<AuthenticationSettings>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                };
+            });
+
+            services.Configure<WeatheryDatabaseSettings>(this.configuration.GetSection(nameof(WeatheryDatabaseSettings)));
+
+            services.AddSingleton<IWeatheryDatabaseSettings>(sp => sp.GetRequiredService<IOptions<WeatheryDatabaseSettings>>().Value);
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IHashService, HashService>();
+
+            services.AddControllers();
+        }
 
         /// <summary>
         /// Method that gets called by the runtime.
@@ -43,6 +88,7 @@
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

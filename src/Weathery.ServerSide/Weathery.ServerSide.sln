@@ -10,6 +10,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weathery.Data", "Weathery.Data\Weathery.Data.csproj", "{F89AAAEE-3CD6-44A9-B4E0-C12FA1219BE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weathery.Services", "Weathery.Services\Weathery.Services.csproj", "{7036250B-552C-45AD-BC1D-D81CA3AD9054}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weathery.Utilities", "Weathery.Utilities\Weathery.Utilities.csproj", "{5A47004B-009A-4BF0-B988-0B2C2C4213DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weathery.ViewModels", "Weathery.ViewModels\Weathery.ViewModels.csproj", "{ADF8A59F-379D-4DA5-AF4F-E46197F45B52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +28,22 @@ Global
 		{5F032A18-B379-4157-A402-D0E4E4B66C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F032A18-B379-4157-A402-D0E4E4B66C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F032A18-B379-4157-A402-D0E4E4B66C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F89AAAEE-3CD6-44A9-B4E0-C12FA1219BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F89AAAEE-3CD6-44A9-B4E0-C12FA1219BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F89AAAEE-3CD6-44A9-B4E0-C12FA1219BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F89AAAEE-3CD6-44A9-B4E0-C12FA1219BE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7036250B-552C-45AD-BC1D-D81CA3AD9054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7036250B-552C-45AD-BC1D-D81CA3AD9054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7036250B-552C-45AD-BC1D-D81CA3AD9054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7036250B-552C-45AD-BC1D-D81CA3AD9054}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A47004B-009A-4BF0-B988-0B2C2C4213DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A47004B-009A-4BF0-B988-0B2C2C4213DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A47004B-009A-4BF0-B988-0B2C2C4213DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A47004B-009A-4BF0-B988-0B2C2C4213DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADF8A59F-379D-4DA5-AF4F-E46197F45B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF8A59F-379D-4DA5-AF4F-E46197F45B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF8A59F-379D-4DA5-AF4F-E46197F45B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF8A59F-379D-4DA5-AF4F-E46197F45B52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
