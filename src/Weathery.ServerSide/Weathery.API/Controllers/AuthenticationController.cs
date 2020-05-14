@@ -1,7 +1,5 @@
 ﻿namespace Weathery.API.Controllers
 {
-    using System.Linq;
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -11,15 +9,13 @@
     using Weathery.ViewModels;
     using Weathery.ViewModels.Authentication;
 
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    public class AuthenticationController : ApiController
     {
         private readonly IUserService userService;
         private readonly IOptions<AuthenticationSettings> settings;
         private readonly ITokenService tokenService;
 
-        public UsersController(
+        public AuthenticationController(
             IUserService userService,
             IOptions<AuthenticationSettings> authSettings,
             ITokenService tokenService)
@@ -52,7 +48,7 @@
         [HttpPost("[action]")]
         public async Task<ActionResult<object>> Login([FromBody]LoginViewModel viewModel)
         {
-            if (this.HttpContext.User.Identity.IsAuthenticated == true)
+            if (this.IsAuthenticated())
             {
                 return this.BadRequest("Already logged in.");
             }

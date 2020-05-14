@@ -1,4 +1,6 @@
-﻿namespace Weathery.ViewModels.UserServicesViewModels
+﻿using System.Collections.Generic;
+
+namespace Weathery.ViewModels.UserServicesViewModels
 {
     public class GetUserViewModel
     {
@@ -7,5 +9,7 @@
         public string Username { get; set; }
 
         public string Password { get; set; }
+
+        public IList<string> SavedCities { get; set; }
     }
 }

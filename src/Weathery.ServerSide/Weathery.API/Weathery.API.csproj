@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Weathery.ViewModels\Weathery.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ControllerExtensions\" />
+  </ItemGroup>
+
 </Project>

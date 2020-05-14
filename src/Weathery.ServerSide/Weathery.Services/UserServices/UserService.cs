@@ -1,6 +1,8 @@
 ﻿namespace Weathery.Services.UserServices
 {
     using MongoDB.Driver;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Weathery.API.Utilities;
     using Weathery.Data.Entities;
@@ -44,8 +46,9 @@
         {
             if (await this.IsUsernameFree(username).ConfigureAwait(false) == false)
             {
-                var user = await this.usersCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
-                return new GetUserViewModel { Id = user.Id, Username = user.Username };
+                // Extract to method.
+                var user = await this.FindUserByUsername(username).ConfigureAwait(false);
+                return new GetUserViewModel { Id = user.Id, Username = user.Username, SavedCities = user.SavedCities.ToList() };
             }
             else
             {
@@ -53,8 +56,39 @@
             }
         }
 
-        private async Task<bool> IsUsernameFree(string username)
-          =>  await this.usersCollection.Find(x => x.Username == username).FirstOrDefaultAsync() == null ? true : false;
+        public async Task<bool> SaveCityAsync(string id, string cityName)
+        {
+            // Extract to method.
+            var user = await this.FindUserById(id).ConfigureAwait(false);
+            if (user == null)
+            {
+                return false;
+            }
+            if (user.SavedCities.Contains(cityName) == true)
+            {
+                return false;
+            }
+            user.SavedCities.Add(cityName);
+            var update = Builders<User>.Update.Set("SavedCities", user.SavedCities);
+            await this.usersCollection.UpdateOneAsync(u => u.Id == user.Id, update).ConfigureAwait(false);
+            return true;
+        }
 
+        public async Task<ICollection<string>> GetAllSavedCities(string id)
+        {
+            var user = await this.FindUserById(id).ConfigureAwait(false);
+            return user.SavedCities.ToList();
+        }
+
+        private async Task<bool> IsUsernameFree(string username)
+          => await this.usersCollection.Find(x => x.Username == username).FirstOrDefaultAsync() == null ? true : false;
+
+        private async Task<User> FindUserById(string id)
+            =>
+                await this.usersCollection.Find(x => x.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
+
+        private async Task<User> FindUserByUsername(string username)
+            =>
+                await this.usersCollection.Find(x => x.Username == username).FirstOrDefaultAsync().ConfigureAwait(false);
     }
 }
