@@ -7,12 +7,19 @@
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.1" />
+    <PackageReference Include="TryAtSoftware.OperationResults" Version="1.0.0-alpha2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Weathery.Data\Weathery.Data.csproj" />
     <ProjectReference Include="..\Weathery.Utilities\Weathery.Utilities.csproj" />
     <ProjectReference Include="..\Weathery.ViewModels\Weathery.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\Shared\stylecop.json">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Weathery.ViewModels.UserServicesViewModels
+﻿namespace Weathery.ViewModels.UserServicesViewModels
 {
+    using System.Collections.Generic;
+
     public class GetUserViewModel
     {
         public string Id { get; set; }

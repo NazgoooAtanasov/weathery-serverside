@@ -1,5 +1,7 @@
-﻿namespace Weathery.API.Utilities
+﻿namespace Weathery.Utilities.DatabaseUtilities
 {
+    using API.Utilities;
+
     public class WeatheryDatabaseSettings : IWeatheryDatabaseSettings
     {
         public string UsersCollection { get; set; }

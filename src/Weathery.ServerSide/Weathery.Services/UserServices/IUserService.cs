@@ -2,16 +2,17 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Weathery.ViewModels.UserServicesViewModels;
+    using TryAtSoftware.OperationResults;
+    using ViewModels.UserServicesViewModels;
 
     public interface IUserService
     {
-        Task<bool> CreateAsync(string username, string password);
+        Task<IOperationResult> CreateAsync(string username, string password);
 
-        Task<GetUserViewModel> GetAsync(string username);
+        Task<IOperationResult<GetUserViewModel>> GetAsync(string username);
 
-        Task<bool> SaveCityAsync(string id, string cityName);
+        Task<IOperationResult> SaveCityAsync(string userId, string cityName);
 
-        Task<ICollection<string>> GetAllSavedCities(string id);
+        Task<IOperationResult<ICollection<string>>> GetAllSavedCities(string userId);
     }
 }

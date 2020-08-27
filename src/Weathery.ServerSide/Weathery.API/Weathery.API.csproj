@@ -16,6 +16,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="TryAtSoftware.OperationResults" Version="1.0.0-alpha2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,10 +27,6 @@
     <ProjectReference Include="..\Weathery.Services\Weathery.Services.csproj" />
     <ProjectReference Include="..\Weathery.Utilities\Weathery.Utilities.csproj" />
     <ProjectReference Include="..\Weathery.ViewModels\Weathery.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ControllerExtensions\" />
   </ItemGroup>
 
 </Project>

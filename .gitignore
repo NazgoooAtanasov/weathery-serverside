@@ -1,6 +1,4 @@
-*.user
-.vscode/
-.vs/
-obj/
+.idea/
 bin/
-src/Weathery.ServerSide/Weathery.API/appsettings.json
+obj/
+appsettings.json

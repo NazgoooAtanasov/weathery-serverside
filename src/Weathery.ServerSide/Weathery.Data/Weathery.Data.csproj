@@ -16,8 +16,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="../Shared/stylecop.json" />
-  </ItemGroup>
-
 </Project>

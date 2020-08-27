@@ -16,6 +16,5 @@
         public string Password { get; set; }
 
         public IList<string> SavedCities { get; set; } = new List<string>();
-
     }
 }
