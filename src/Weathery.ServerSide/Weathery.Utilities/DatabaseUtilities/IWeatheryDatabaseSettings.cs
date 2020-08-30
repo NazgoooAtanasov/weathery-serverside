@@ -1,4 +1,4 @@
-﻿namespace Weathery.API.Utilities
+﻿namespace Weathery.Utilities.DatabaseUtilities
 {
     public interface IWeatheryDatabaseSettings
     {

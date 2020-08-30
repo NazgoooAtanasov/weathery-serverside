@@ -7,18 +7,12 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Options;
-    using Services.HashService;
-    using Services.TokenService;
-    using Services.UserServices;
-    using Utilities;
-    using Weathery.Utilities.AuthenticationUtilities;
-    using Weathery.Utilities.DatabaseUtilities;
+    using Utilities.AuthenticationUtilities;
 
     /// <summary>Defines the startup class for the application.</summary>
     public class Startup
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Startup" /> class.
@@ -26,7 +20,7 @@
         /// <param name="configuration">
         ///     The <see cref="IConfiguration" /> for the application.
         /// </param>
-        public Startup(IConfiguration configuration) => this.configuration = configuration;
+        public Startup(IConfiguration configuration) => this._configuration = configuration;
 
         /// <summary>
         ///     Method that adds all the needed services for the application.
@@ -36,24 +30,19 @@
         /// </param>
         public void ConfigureServices(IServiceCollection services)
         {
-            var appSettingsSection = this.configuration.GetSection(nameof(AuthenticationSettings));
+            var appSettingsSection = this._configuration.GetSection(nameof(AuthenticationSettings));
             services.Configure<AuthenticationSettings>(appSettingsSection);
 
-            // configure jwt authentication
+            // Configuring the jwt authentication.
             var appSettings = appSettingsSection.Get<AuthenticationSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             JwtTokenAuthentication.JwtTokenSetUp(services, key);
 
-            services.Configure<WeatheryDatabaseSettings>(
-                this.configuration.GetSection(nameof(WeatheryDatabaseSettings)));
-            services.AddSingleton<IWeatheryDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<WeatheryDatabaseSettings>>().Value);
+            // Configuring the database.
+            DatabaseConfiguration.Setup(this._configuration, services);
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IHashService, HashService>();
-
-            services.AddControllers();
+            // Configuring the services.
+            ServicesConfiguration.Setup(services);
         }
 
         /// <summary>
@@ -63,7 +52,10 @@
         /// <param name="env">The <see cref="IWebHostEnvironment" /> for the application.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseHttpsRedirection();
 

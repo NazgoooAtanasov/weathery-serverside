@@ -5,17 +5,16 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Services.UserServices;
+    using Services.UserService;
     using ViewModels;
 
     // TODO: IMPLEMENT FLUENTVALIDATION!
-    // TODO: IMPLEMENT OPERATIONRESULT!
     [Authorize]
     public class UserController : ApiController
     {
-        private readonly IUserService userService;
+        private readonly IUserService _userService;
 
-        public UserController(IUserService userService) => this.userService = userService;
+        public UserController(IUserService userService) => this._userService = userService;
 
         [HttpPost("[action]")]
         public async Task<ActionResult> SaveCity([FromBody] SaveCityViewModel viewModel)
@@ -26,7 +25,7 @@
             }
 
             var userId = this.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            var operation = await this.userService.SaveCityAsync(userId, viewModel.CityName).ConfigureAwait(false);
+            var operation = await this._userService.SaveCityAsync(userId, viewModel.CityName).ConfigureAwait(false);
 
             if (operation.Success == false)
             {
@@ -42,7 +41,7 @@
             if (this.IsAuthenticated())
             {
                 var operation =
-                    await this.userService.GetAllSavedCities(this.GetLoggedUserId()).ConfigureAwait(false);
+                    await this._userService.GetAllSavedCities(this.GetLoggedUserId()).ConfigureAwait(false);
                 return this.Ok(operation.Data);
             }
 

@@ -1,4 +1,4 @@
-﻿namespace Weathery.Services.UserServices
+﻿namespace Weathery.Services.UserService
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

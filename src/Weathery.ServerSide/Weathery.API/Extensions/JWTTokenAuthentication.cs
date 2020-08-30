@@ -5,14 +5,14 @@
     using Microsoft.IdentityModel.Tokens;
 
     /// <summary>
-    /// Base class that sets up the configuration for the Jwt authentication.
+    ///     Base class that sets up the configuration for the Jwt authentication.
     /// </summary>
     public static class JwtTokenAuthentication
     {
         /// <summary>
-        /// Sets up the configuration for the Jwt authentication.
+        ///     Sets up the configuration for the Jwt authentication.
         /// </summary>
-        /// <param name="services"><see cref="IServiceCollection"/> to store the service</param>
+        /// <param name="services"><see cref="IServiceCollection" /> to store the service.</param>
         /// <param name="key">The secret.</param>
         public static void JwtTokenSetUp(IServiceCollection services, byte[] key)
             =>

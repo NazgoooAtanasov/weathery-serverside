@@ -4,13 +4,11 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Services.TokenService;
-    using Services.UserServices;
-    using ViewModels;
+    using Services.UserService;
+    using Utilities.AuthenticationUtilities;
     using ViewModels.Authentication;
-    using Weathery.Utilities.AuthenticationUtilities;
 
     // TODO: IMPLEMENT FLUENTVALIDATION!
-    // TODO: IMPLEMENT OPERATIONRESULT!
     public class AuthenticationController : ApiController
     {
         private readonly IOptions<AuthenticationSettings> _settings;
@@ -25,13 +23,6 @@
             this._userService = userService;
             this._settings = authSettings;
             this._tokenService = tokenService;
-        }
-
-
-        [HttpGet("[action]")]
-        public async Task<ActionResult> Hey()
-        {
-            return this.Ok("heyt");
         }
 
         [HttpPost("[action]")]
@@ -76,7 +67,8 @@
             return new TokenViewModel
             {
                 Token =
-                    this._tokenService.CreateToken(user.Data.Id, user.Data.Username, this._settings.Value.Secret),
+                    this._tokenService.CreateToken(user.Data.Id, user.Data.Username, this._settings.Value.Secret)
+                ,
             };
         }
     }

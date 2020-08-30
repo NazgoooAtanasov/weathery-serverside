@@ -1,4 +1,4 @@
-﻿namespace Weathery.ViewModels
+﻿namespace Weathery.ViewModels.Authentication
 {
     public class CreateUserViewModel
     {
