@@ -1,9 +1,15 @@
 namespace Weathery.API.Extensions
 {
+    using FluentValidation;
+    using FluentValidation.AspNetCore;
     using Microsoft.Extensions.DependencyInjection;
     using Services.HashService;
     using Services.TokenService;
     using Services.UserService;
+    using ViewModels;
+    using ViewModels.Authentication;
+    using ViewModels.Authentication.Validators;
+    using ViewModels.Validators;
 
     /// <summary>Class used to configure the services for the application.</summary>
     public static class ServicesConfiguration
@@ -18,7 +24,11 @@ namespace Weathery.API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IHashService, HashService>();
 
-            services.AddControllers();
+            services.AddTransient<IValidator<CreateUserViewModel>, CrateUserViewModelValidator>();
+            services.AddTransient<IValidator<LoginViewModel>, LoginViewModelValidator>();
+            services.AddTransient<IValidator<SaveCityViewModel>, SaveCityViewModelValidator>();
+
+            services.AddControllers().AddFluentValidation();
         }
     }
 }
